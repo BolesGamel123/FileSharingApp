@@ -1,0 +1,44 @@
+﻿@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Home Page";
+    var ImagesContentType = new[] { "image/png", "image/jpeg" };
+}
+
+<div class="text-center">
+    <h1>@Localizer["Header"]</h1>
+    <br />
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <form asp-controller="Uploads" asp-action="Results">
+                    <div class="input-group input-group-lg mb-3">
+                        <input type="text" class="form-control" name="Term" placeholder=" File Name" aria-label="Search Files" aria-describedby="button-addon2" id="exampleFormControlFile1">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit" id="button-addon2">@Localizer["button.Search"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12 text-center" style="margin-top:40px">
+                <h2>@Localizer["Popular"]</h2>
+                <hr />
+                <table class="table">
+                    @foreach (UploadViewModel item in ViewBag.Popular)
+                    {
+                        <tr>
+                            <td>
+
+                                @if (ImagesContentType.Contains(item.ContentType))
+                                {
+                                    <img src="~/Uploads/@item.FileName" width="70" height="70" class="img-thumbnail" alt="img test" />
+                                }
+                            </td>
+                            <td>@item.OriginFileName</td>
+                            <td>@Localizer["Downloads"] :@item.DownloadCount</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
