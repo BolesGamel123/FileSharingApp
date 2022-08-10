@@ -46,18 +46,31 @@ namespace FileSharingApp.Controllers
         {
             if(ModelState.IsValid)
             {
-               var result=await signInManager.PasswordSignInAsync(model.Email, model.Password, true, true);
-                if(result.Succeeded)
+                var ExistedUser = await userManager.FindByEmailAsync(model.Email);
+                if (ExistedUser==null)
                 {
-                    if (!string.IsNullOrEmpty(returnUrl))
-                    {
-                        return LocalRedirect(returnUrl);
-                    }
-                    return RedirectToAction("Create", "Uploads");
+                    TempData["Error"] = "Invalid Email Or Password";
+                    return View(model);
                 }
-                //else if(result.IsNotAllowed){
-                //    TempData["Error"] = stringLocalizer["RequireConfirmedEmail"]?.Value;
-                //}
+              if(!ExistedUser.IsBlocked)
+                {
+                    var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, true, true);
+                    if (result.Succeeded)
+                    {
+                        if (!string.IsNullOrEmpty(returnUrl))
+                        {
+                            return LocalRedirect(returnUrl);
+                        }
+                        return RedirectToAction("Create", "Uploads");
+                    }
+                }
+
+                else
+                {
+                    TempData["Error"] = "the account has been Blocked";
+                }
+              
+               
             }
             return View(model);
         }
@@ -156,6 +169,26 @@ namespace FileSharingApp.Controllers
                 
 
             }
+
+            if (info.Principal.HasClaim(c=>c.Type==ClaimTypes.Email))
+            {
+                var Email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+                var ExistedUser = await userManager.FindByEmailAsync(Email);
+            if (ExistedUser == null)
+            {
+                TempData["Error"] = "Invalid Email Or Password";
+                return RedirectToAction("Login");
+            }
+            if (ExistedUser.IsBlocked)
+            {
+                    await signInManager.SignOutAsync();
+                    TempData["Error"] = "the account has been Blocked";
+                    return RedirectToAction("Login");
+                }
+            }
+
+
             return RedirectToAction("Index", "Home");
         }
 

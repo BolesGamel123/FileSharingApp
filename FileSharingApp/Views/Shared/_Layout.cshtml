@@ -113,9 +113,14 @@
 
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Localizer["Blog"]</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                           
-                                    <a asp-area="" asp-controller="Account" asp-action="Info">@Localizer["Info"]</a>                                                  
-                                <a asp-area="" asp-controller="Account" asp-action="Logout">@Localizer["Logout"]</a>                            
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a asp-area="" asp-controller="Account" asp-action="Info">@Localizer["Info"]</a>
+                                    @if (User.IsInRole(UserRoles.Admin))
+                                    {
+                                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+                                    }
+
+                                    <a asp-area="" asp-controller="Account" asp-action="Logout">@Localizer["Logout"]</a>
                                 </div>
                             </li>
                         }
@@ -315,6 +320,7 @@
             lazyload();
 
         });
+        
     </script>
 </body>
 </html>

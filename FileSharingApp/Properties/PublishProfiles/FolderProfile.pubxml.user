@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Office\Desktop\Presentations</_PublishTargetUrl>
+    <History>True|2022-08-08T16:48:04.0055814Z;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="MyConn">
+      <Value>Data Source=.%3bInitial Catalog=DbFile%3bIntegrated security=true</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

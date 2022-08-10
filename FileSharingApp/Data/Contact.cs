@@ -17,6 +17,10 @@ namespace FileSharingApp.Data
         public string Subject { get; set; }
        
         public string Message { get; set; }
+        public bool Status { get; set; }
+
+        public DateTime SentDate { get; set; }
+
 
         [ForeignKey("User")]
         public string UserId { get; set; }

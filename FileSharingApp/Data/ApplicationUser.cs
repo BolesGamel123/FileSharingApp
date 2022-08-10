@@ -10,5 +10,7 @@ namespace FileSharingApp.Data
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Boolean IsBlocked { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

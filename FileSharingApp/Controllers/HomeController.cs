@@ -1,8 +1,10 @@
 ﻿using FileSharingApp.Data;
+
 using FileSharingApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,13 +20,14 @@ namespace FileSharingApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext context;
-       
+   
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context
+            )
         {
             _logger = logger;
             this.context = context;
-           
+         
         }
 
         public IActionResult Index()

@@ -24,7 +24,22 @@ namespace FileSharingApp
         {
             CreateMap<Data.ApplicationUser, Models.UserViewModel>()
                  .ForMember(u => u.HasPassword, op => op.MapFrom(u=>u.PasswordHash!=null));
+
+            CreateMap<Data.ApplicationUser, Areas.Admin.Models.AdminUserViewModel>()
+                .ForMember(u => u.UserId, op => op.MapFrom(u => u.Id));
         }
        
+    }
+
+
+    public class ContactUsProfile : Profile
+    {
+        public ContactUsProfile()
+        {
+            CreateMap<Data.Contact, Areas.Admin.Models.ContactUsViewModel>();
+            
+
+        }
+
     }
 }

@@ -1,4 +1,7 @@
+using FileSharingApp.Areas.Admin;
+using FileSharingApp.Areas.Admin.Services;
 using FileSharingApp.Data;
+
 using FileSharingApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -66,10 +69,11 @@ namespace FileSharingApp
                 
 
             services.AddTransient<IUploadService, UploadService>();
+            services.AddAdminServices();
             services.AddLocalization();
 
             services.AddAutoMapper(typeof(Startup));
-
+           
            
 
         }
@@ -103,9 +107,18 @@ namespace FileSharingApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+            name: "areas",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+          );
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+               
             });
+
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath);
         }
     }
 }

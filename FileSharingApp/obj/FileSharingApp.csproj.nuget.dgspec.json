@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[3.2.449, )"
             },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.96.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.Facebook": {
               "target": "Package",
               "version": "[5.0.16, )"
@@ -85,6 +89,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Rotativa.AspNetCore": {
+              "target": "Package",
+              "version": "[1.2.0-beta, )"
             }
           },
           "imports": [
